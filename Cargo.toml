@@ -1,0 +1,11 @@
+[package]
+name = "tinydock"
+version = "1.0.0"
+edition = "2021"
+
+[dependencies]
+gtk = "0.16"
+gio = "0.16"
+glib = "0.16"
+gdk-pixbuf = "0.16"
+gdk = "0.16"

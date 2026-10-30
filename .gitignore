@@ -1,0 +1,4 @@
+target/
+*.deb
+tinydock.desktop
+tclock.desktop

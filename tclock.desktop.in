@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=tclock
+Comment=桌面模拟时钟小组件（Rust / eframe）
+Exec=@BINDIR@/tclock
+Icon=clock
+Terminal=false
+Categories=Utility;
+StartupNotify=false
+X-GNOME-Autostart-enabled=true
+X-GNOME-Autostart-Delay=3

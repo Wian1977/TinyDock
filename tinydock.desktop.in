@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=TinyDock
+Comment=弹性缩放的轻量 dock（Rust / GTK3）
+Exec=@BINDIR@/tinydock
+Icon=applications-utilities
+Terminal=false
+Categories=System;Utility;
+StartupNotify=false
+X-GNOME-Autostart-enabled=true
+X-GNOME-Autostart-Delay=2
