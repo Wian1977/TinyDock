@@ -50,3 +50,36 @@ GitHub 在国内访问慢且不稳，建议同步做以下动作：
 - **知乎**：包装成「用 Rust + GTK3 从零写一个弹性 dock」的经验文，顺带安利项目。
 
 > 痛点提醒：很多国内用户连 GitHub 都打不开，所以**务必提供 Gitee 镜像或国内可访问的下载地址**，否则他们看到项目也装不上。
+
+## GitHub 站内 / 生态曝光（不依赖外部社区）
+
+即使不逛 Reddit 等外部社区，也能在 GitHub 生态内提升可见度；受众是能正常访问 GitHub 的海外用户，不受你本地网络影响。
+
+- **Topics 话题页**：仓库已出现在 `github.com/topics/<词>`。建议在仓库 About 区补充关键词：
+  `dock, launcher, gtk3, gtk-rs, rust, linux, linuxmint, wayland, x11, desktop, cinnamon, debian`。
+  词越精准，被搜到的概率越高。
+- **投稿 awesome 列表（最高杠杆）**：向以下高流量仓库提 PR，把 TinyDock 加进它们的清单，项目会直接出现在这些仓库的 README 里（曝光巨大）：
+  - [awesome-rust](https://github.com/rust-unofficial/awesome-rust)（GUI/Apps 分类；若想进此列表，建议先把 crate 发到 crates.io）
+  - [awesome-linux](https://github.com/iurisegtovich/awesome-linux)（桌面环境/工具分类）
+  - 各类 GTK / 桌面美化清单
+  下方提供了可直接复制的 PR 标题与描述。
+- **完善 About**：仓库 About 区勾选 topics、填写 Website（可填 Release 页）、简介一句话。
+- **crates.io（可选）**：`cargo publish` 把二进制发到 crates.io，进入 Rust 生态搜索；对 GUI 应用意义有限，可作为补充。
+
+### awesome 列表 PR 文案（复制即用）
+
+**PR 标题**：`Add TinyDock — a lightweight elastic-zoom dock in Rust + GTK3`
+
+**PR 描述**：
+
+```
+TinyDock is a lightweight elastic-zoom dock written in Rust + GTK3.
+
+- Hover to elastic-zoom icons (easeOutBack), smooth spring-back on leave
+- Indicator dots show window state (focused / running / none)
+- Right-click menu: zoom level, add apps, transparent bar
+- Bundled tclock desk clock, autostarts on login
+- Prebuilt .deb for Ubuntu 24.04 / Linux Mint 21 & 22
+
+https://github.com/Wian1977/TinyDock
+```
