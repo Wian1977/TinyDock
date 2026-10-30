@@ -1,0 +1,41 @@
+name: Build Debian packages
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        include:
+          - runner: ubuntu-24.04
+            suffix: ""
+          - runner: ubuntu-22.04
+            suffix: "_ubuntu22"
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libgtk-3-dev libwnck-3-dev pkg-config \
+            libxkbcommon-dev libwayland-dev libx11-dev libgl1-mesa-dev \
+            libglu1-mesa-dev libasound2-dev fakeroot dpkg-dev
+      - name: Build .deb
+        env:
+          DEB_SUFFIX: ${{ matrix.suffix }}
+        run: ./build-deb.sh 1.0
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: deb-${{ matrix.runner }}
+          path: "*.deb"
+      - name: Publish to GitHub Release
+        if: startsWith(github.ref, "refs/tags/")
+        uses: softprops/action-gh-release@v2
+        with:
+          files: "*.deb"

@@ -13,7 +13,8 @@ DESKIN=$HERE/$APP.desktop.in
 TCLOCK_SRC=${TCLOCK_SRC:-$HERE/tclock}
 TCLOCK_BIN=$TCLOCK_SRC/target/release/tclock
 TCLOCK_DESKIN=$HERE/tclock.desktop.in
-OUT=$HERE/${APP}_${VERSION}_${ARCH}.deb
+DEB_SUFFIX=${DEB_SUFFIX:-}
+OUT=$HERE/${APP}_${VERSION}_${ARCH}${DEB_SUFFIX}.deb
 
 # 1) 确保有 release 二进制（dock + tclock）
 if [ ! -x $BIN ]; then

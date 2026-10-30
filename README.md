@@ -1,5 +1,7 @@
 # TinyDock
 
+[![Build](https://github.com/Wian1977/TinyDock/actions/workflows/build.yml/badge.svg)](https://github.com/Wian1977/TinyDock/actions) [![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE) [![Downloads](https://img.shields.io/github/downloads/Wian1977/TinyDock/total)](https://github.com/Wian1977/TinyDock/releases)
+
 > **A Super Easy Dock** —— 轻量、弹性、开箱即用，一行命令装好就能用。
 
 ![TinyDock 预览](screenshot.png)
@@ -25,7 +27,15 @@
 
 ## 系统要求 / 兼容性
 
-- Linux 桌面环境（已验证 Linux Mint 22.3 / Ubuntu 24.04 系，GNOME / Cinnamon 等 GTK3 桌面）。
+- Linux 桌面环境（GNOME / Cinnamon 等 GTK3 桌面）。
+- **预构建安装包（推荐直接下载）**，按发行版选择对应包：
+
+  | 发行版 | 安装包 |
+  |--------|--------|
+  | Ubuntu 24.04 / **Linux Mint 22** | `tinydock_1.0_amd64.deb` |
+  | Ubuntu 22.04 / **Linux Mint 21** | `tinydock_1.0_amd64_ubuntu22.deb` |
+
+  > 两者仅运行库包名不同（24.04 为 t64 改名后的 `libgtk-3-0t64`，22.04 为 `libgtk-3-0`），源码完全一致，已用 CI 在两个 runner 上分别自动构建并随 Release 发布。
 - 运行期依赖（打包时由 dpkg-shlibdeps 自动推导）：GTK3、libwnck-3、cairo、glib、pango、atk 等。
 - 构建依赖：cargo + rustc、libgtk-3-dev、libwnck-3-dev、pkg-config。
 - **tclock 额外构建依赖**（eframe/OpenGL）：libxkbcommon-dev、libwayland-dev、libx11-dev、libgl1-mesa-dev、libglu1-mesa-dev、libasound2-dev、pkg-config。
@@ -48,11 +58,24 @@ cargo build --release
 
 ## 安装
 
-### 方式一：打包成 .deb（推荐，可用系统包管理器管理）
+### 方式一：下载预构建 .deb（推荐，可用系统包管理器管理）
+
+到 [Releases](https://github.com/Wian1977/TinyDock/releases) 下载对应发行版的包，然后：
 
 ```bash
-make deb            # 等价于 ./build-deb.sh 1.0
+# Ubuntu 24.04 / Linux Mint 22：
 sudo dpkg -i tinydock_1.0_amd64.deb
+# Ubuntu 22.04 / Linux Mint 21：
+sudo dpkg -i tinydock_1.0_amd64_ubuntu22.deb
+# 若提示依赖缺失，自动补全：
+sudo apt -f install
+```
+
+也可以本地自行打包（产出同名的 .deb）：
+
+```bash
+make deb                        # 默认产出当前系统对应版本的 tinydock_1.0_amd64.deb
+make deb DEB_SUFFIX=_ubuntu22   # 产出 ubuntu22 版本（须在 22.04 系构建）
 ```
 
 ### 方式二：直接安装到 /usr/local（免打包）
