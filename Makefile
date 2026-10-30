@@ -1,7 +1,9 @@
 APP := tinydock
 VERSION := 1.0
 ARCH := $(shell dpkg --print-architecture 2>/dev/null || echo amd64)
-DEB := $(APP)_$(VERSION)_$(ARCH).deb
+DEB_SUFFIX ?=
+export DEB_SUFFIX
+DEB := $(APP)_$(VERSION)_$(ARCH)$(DEB_SUFFIX).deb
 
 .PHONY: all build release deb install uninstall clean
 
