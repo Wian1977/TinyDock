@@ -434,9 +434,17 @@ fn load_icon_by_id(id: &str, size: i32) -> Pixbuf {
         .unwrap_or_else(|| scaled(&fallback_pixbuf(), size))
 }
 
-fn launch_id(id: &str) {
+fn launch_id(id: &str, t: u32) {
     if let Some(app) = gio::DesktopAppInfo::new(id) {
-        let _ = app.launch(&[], None::<&gio::AppLaunchContext>);
+        let ctx = gdk::Display::default().and_then(|d| d.app_launch_context());
+        if let Some(c) = ctx.as_ref() {
+            c.set_timestamp(t);
+        }
+        if let Err(e) = app.launch(&[], ctx.as_ref()) {
+            eprintln!("tinydock: failed to launch {}: {}", id, e);
+        }
+    } else {
+        eprintln!("tinydock: desktop app not found: {}", id);
     }
 }
 
@@ -687,7 +695,7 @@ impl DockState {
     fn on_left(&self, id: &str, t: u32) {
         let wins = self.running.borrow().get(id).cloned().unwrap_or_default();
         match wins.len() {
-            0 => launch_id(id),
+            0 => launch_id(id, t),
             1 => activate_by_xid(wins[0].xid, t),
             _ => self.show_preview(id, t),
         }
@@ -727,7 +735,7 @@ impl DockState {
         if wins.len() <= 1 {
             let open = gtk::MenuItem::with_label("打开新窗口");
             let ido = idc.clone();
-            open.connect_activate(move |_| launch_id(&ido));
+            open.connect_activate(move |_| launch_id(&ido, t));
             menu.append(&open);
             if wins.len() == 1 {
                 let xid = wins[0].xid;
@@ -758,7 +766,7 @@ impl DockState {
             menu.append(&closeall);
             let open = gtk::MenuItem::with_label("打开新窗口");
             let ido = idc.clone();
-            open.connect_activate(move |_| launch_id(&ido));
+            open.connect_activate(move |_| launch_id(&ido, t));
             menu.append(&open);
         }
 
