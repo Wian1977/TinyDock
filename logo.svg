@@ -10,6 +10,8 @@
   <!-- 眼睛：macOS 风格短竖线 -->
   <line x1="103" y1="84" x2="103" y2="100" stroke="#ffffff" stroke-width="7" stroke-linecap="round"/>
   <line x1="153" y1="84" x2="153" y2="100" stroke="#ffffff" stroke-width="7" stroke-linecap="round"/>
+  <!-- 鼻子：居中短竖线，比眼睛略细 -->
+  <line x1="128" y1="104" x2="128" y2="116" stroke="#ffffff" stroke-width="5" stroke-linecap="round"/>
   <!-- 微笑：线条更细 -->
   <path d="M101 124 Q128 150 155 124" stroke="#ffffff" stroke-width="7" fill="none" stroke-linecap="round"/>
   <!-- 底部蓝色短线（与 dock 指示同款） -->
