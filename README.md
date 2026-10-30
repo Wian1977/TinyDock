@@ -1,5 +1,9 @@
 # TinyDock
 
+> **A Super Easy Dock** —— 轻量、弹性、开箱即用，一行命令装好就能用。
+
+![TinyDock 预览](screenshot.png)
+
 一个用 **Rust + GTK3** 实现的轻量级底部 dock，主打「悬停弹性放大」与简洁的窗口指示。
 
 ## 特性
