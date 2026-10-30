@@ -43,3 +43,4 @@ jobs:
         with:
           tag_name: v1.0
           files: "*.deb"
+          overwrite: true
