@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <defs>
+    <linearGradient id="face" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3b9bff"/>
+      <stop offset="1" stop-color="#0a6cff"/>
+    </linearGradient>
+  </defs>
+  <!-- 蓝色小人脸 -->
+  <circle cx="128" cy="104" r="74" fill="url(#face)"/>
+  <!-- 眼睛 -->
+  <circle cx="103" cy="92" r="12" fill="#ffffff"/>
+  <circle cx="153" cy="92" r="12" fill="#ffffff"/>
+  <!-- 微笑 -->
+  <path d="M99 122 Q128 154 157 122" stroke="#ffffff" stroke-width="10" fill="none" stroke-linecap="round"/>
+  <!-- 底部蓝色短线（与 dock 指示同款） -->
+  <rect x="84" y="212" width="88" height="14" rx="7" fill="#0a6cff"/>
+</svg>

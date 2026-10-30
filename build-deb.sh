@@ -44,6 +44,11 @@ for pair in $DESKIN:tinydock.desktop $TCLOCK_DESKIN:tclock.desktop; do
 done
 chmod 644 $STAGE/usr/share/applications/*.desktop
 
+# logo（应用图标，安装到 hicolor 主题）
+mkdir -p $STAGE/usr/share/icons/hicolor/scalable/apps $STAGE/usr/share/icons/hicolor/256x256/apps
+install -m644 $HERE/logo.svg $STAGE/usr/share/icons/hicolor/scalable/apps/tinydock.svg
+install -m644 $HERE/logo.png $STAGE/usr/share/icons/hicolor/256x256/apps/tinydock.png
+
 # 4) dpkg-shlibdeps 自动推导依赖（dock 的依赖；tclock 的 GL/X11 为 dlopen，另行补充）
 echo '==> 推导共享库依赖 (dpkg-shlibdeps)'
 mkdir -p $DPKGCTX/debian

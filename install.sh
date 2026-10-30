@@ -40,6 +40,12 @@ $SUDO install -m755 $TCLOCK_BIN /usr/local/bin/tclock
 $SUDO install -m644 $DESK /usr/share/applications/$APP.desktop
 $SUDO install -m644 $TCDESK /usr/share/applications/tclock.desktop
 
+# logo（应用图标）
+$SUDO mkdir -p /usr/share/icons/hicolor/scalable/apps /usr/share/icons/hicolor/256x256/apps
+$SUDO install -m644 $HERE/logo.svg /usr/share/icons/hicolor/scalable/apps/tinydock.svg
+$SUDO install -m644 $HERE/logo.png /usr/share/icons/hicolor/256x256/apps/tinydock.png
+$SUDO gtk-update-icon-cache -f /usr/share/icons/hicolor 2>/dev/null || true
+
 # 登录自启（两者都启用）
 mkdir -p $HOME/.config/autostart
 install -m644 $DESK $HOME/.config/autostart/$APP.desktop

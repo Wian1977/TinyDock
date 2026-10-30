@@ -4,6 +4,8 @@
 
 > **A Super Easy Dock** —— 轻量、弹性、开箱即用，一行命令装好就能用。
 
+<p align="center"><img src="logo.svg" width="128" alt="TinyDock logo"></p>
+
 ![TinyDock 预览](screenshot.png)
 
 ## 演示
