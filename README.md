@@ -98,8 +98,8 @@ make uninstall
   `libgl1`、`libxkbcommon0`、`libx11-6` 等运行期依赖（桌面环境一般已自带）。
 - 如需关闭 tclock 自启：删除对应的自启项
   （`~/.config/autostart/tclock.desktop`，或 .deb 方式下的 `/etc/xdg/autostart/tclock.desktop`）。
-- tclock 源码默认位于 `/home/u/workspace/tclock`，可用环境变量 `TCLOCK_SRC`
-  在构建/打包时指定其他位置。
+- tclock 源码已随仓库一并附带在 `tclock/` 子目录，构建/打包脚本默认使用该目录；
+  如需指向其他位置的 tclock 源码，可用环境变量 `TCLOCK_SRC` 覆盖。
 
 ## 已知限制
 

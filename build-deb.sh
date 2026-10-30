@@ -10,7 +10,7 @@ HERE=$(cd $(dirname "$0") && pwd)
 BIN=$HERE/target/release/$APP
 DESKIN=$HERE/$APP.desktop.in
 # tclock 源码位置（可用环境变量 TCLOCK_SRC 覆盖）
-TCLOCK_SRC=${TCLOCK_SRC:-/home/u/workspace/tclock}
+TCLOCK_SRC=${TCLOCK_SRC:-$HERE/tclock}
 TCLOCK_BIN=$TCLOCK_SRC/target/release/tclock
 TCLOCK_DESKIN=$HERE/tclock.desktop.in
 OUT=$HERE/${APP}_${VERSION}_${ARCH}.deb
