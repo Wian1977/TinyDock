@@ -7,11 +7,11 @@
   </defs>
   <!-- 蓝色小人脸 -->
   <circle cx="128" cy="104" r="74" fill="url(#face)"/>
-  <!-- 眼睛 -->
-  <circle cx="103" cy="92" r="12" fill="#ffffff"/>
-  <circle cx="153" cy="92" r="12" fill="#ffffff"/>
-  <!-- 微笑 -->
-  <path d="M99 122 Q128 154 157 122" stroke="#ffffff" stroke-width="10" fill="none" stroke-linecap="round"/>
+  <!-- 眼睛：macOS 风格短竖线 -->
+  <line x1="103" y1="84" x2="103" y2="100" stroke="#ffffff" stroke-width="7" stroke-linecap="round"/>
+  <line x1="153" y1="84" x2="153" y2="100" stroke="#ffffff" stroke-width="7" stroke-linecap="round"/>
+  <!-- 微笑：线条更细 -->
+  <path d="M101 124 Q128 150 155 124" stroke="#ffffff" stroke-width="7" fill="none" stroke-linecap="round"/>
   <!-- 底部蓝色短线（与 dock 指示同款） -->
   <rect x="84" y="212" width="88" height="14" rx="7" fill="#0a6cff"/>
 </svg>
