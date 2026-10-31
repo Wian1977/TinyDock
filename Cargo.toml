@@ -2,6 +2,14 @@
 name = "tinydock"
 version = "1.0.0"
 edition = "2021"
+description = "A lightweight elastic-zoom bottom dock for Linux (Rust + GTK3), with a bundled tclock clock widget."
+repository = "https://github.com/Wian1977/TinyDock"
+homepage = "https://github.com/Wian1977/TinyDock"
+documentation = "https://github.com/Wian1977/TinyDock#readme"
+readme = "README.md"
+license = "MIT"
+authors = ["Wian1977"]
+keywords = ["dock", "launcher", "gtk3", "gtk-rs", "rust", "linux", "linuxmint", "wayland", "x11", "desktop", "ricing", "macos-dock", "desktop-customization"]
 
 [dependencies]
 gtk = "0.16"

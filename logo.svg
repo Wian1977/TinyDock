@@ -11,9 +11,8 @@
   <!-- 眼睛：左眼白(蓝底) 右眼蓝(白底) -->
   <line x1="103" y1="84" x2="103" y2="100" stroke="#ffffff" stroke-width="7" stroke-linecap="round"/>
   <line x1="153" y1="84" x2="153" y2="100" stroke="#0a6cff" stroke-width="7" stroke-linecap="round"/>
-  <!-- 微笑：左白(蓝底) 右蓝(白底)，在中线(鼻子)汇合 -->
-  <path d="M101 124 Q116 151 128 137" stroke="#ffffff" stroke-width="7" fill="none" stroke-linecap="round"/>
-  <path d="M128 137 Q140 151 155 124" stroke="#0a6cff" stroke-width="7" fill="none" stroke-linecap="round"/>
+  <!-- 微笑：单条平滑弧线(深蓝，蓝白两半都可见)，无中缝尖角 -->
+  <path d="M101 124 Q128 150 155 124" stroke="#0a3a8c" stroke-width="7" fill="none" stroke-linecap="round"/>
   <!-- 底部蓝色短线（与 dock 指示同款） -->
   <rect x="84" y="212" width="88" height="14" rx="7" fill="#0a6cff"/>
 </svg>
