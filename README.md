@@ -40,7 +40,7 @@
   |--------|--------|
   | Ubuntu 24.04 / **Linux Mint 22** | `tinydock_1.0_amd64.deb` |
   | Ubuntu 22.04 / **Linux Mint 21** | `tinydock_1.0_amd64_ubuntu22.deb` |
-  | Ubuntu 20.04 / **Linux Mint 20** | `tinydock_1.0_amd64_ubuntu20.deb`（见下方说明） |
+  | Ubuntu 20.04 / **Linux Mint 20** | 无预构建包；本机 `make deb DEB_SUFFIX=_ubuntu20` 生成（见下方说明） |
   | Ubuntu 26.04 / **Linux Mint 23**（预期） | 可直接沿用上面的 `tinydock_1.0_amd64.deb`（同为 t64 库） |
 
   > 各包**源码完全一致**，仅运行库包名不同（24.04 / 26.04 为 t64 改名后的 `libgtk-3-0t64`，20.04 / 22.04 为 `libgtk-3-0`）；依赖由 `dpkg-shlibdeps` 在对应 runner 上自动推导。已由 CI 在 ubuntu-24.04 / 22.04 上分别构建并随 Release 发布。
