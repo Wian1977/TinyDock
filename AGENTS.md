@@ -31,6 +31,7 @@ cargo build --release                       # tinydock -> target/release/tinydoc
 ```bash
 make deb                              # amd64 .deb for the current distro
 make deb DEB_SUFFIX=_ubuntu22         # Ubuntu 22.04 / Mint 21 (build on a 22.04 host)
+make deb DEB_SUFFIX=_ubuntu20         # Ubuntu 20.04 / Mint 20 (build on a 20.04 host; GitHub no longer provides a 20.04 CI runner)
 # or:
 ./build-deb.sh 1.0
 ```
