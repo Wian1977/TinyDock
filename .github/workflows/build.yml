@@ -17,6 +17,8 @@ jobs:
             suffix: ""
           - runner: ubuntu-22.04
             suffix: "_ubuntu22"
+          - runner: ubuntu-20.04
+            suffix: "_ubuntu20"
     runs-on: ${{ matrix.runner }}
     steps:
       - uses: actions/checkout@v4

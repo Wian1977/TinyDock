@@ -33,15 +33,19 @@
 
 ## 系统要求 / 兼容性
 
-- Linux 桌面环境（GNOME / Cinnamon 等 GTK3 桌面）。
+- **桌面环境无关（不是 Cinnamon 专属）**：只要是基于 **GTK3** 的桌面即可 —— **Cinnamon / MATE / Xfce / GNOME** 等；窗口状态通过 libwnck-3 在 **X11 会话**下轮询刷新（Wayland 下受限，见「已知限制」）。自启项走 XDG 标准路径（`/etc/xdg/autostart`），三种 Mint 桌面都随登录自启。
 - **预构建安装包（推荐直接下载）**，按发行版选择对应包：
 
   | 发行版 | 安装包 |
   |--------|--------|
   | Ubuntu 24.04 / **Linux Mint 22** | `tinydock_1.0_amd64.deb` |
   | Ubuntu 22.04 / **Linux Mint 21** | `tinydock_1.0_amd64_ubuntu22.deb` |
+  | Ubuntu 20.04 / **Linux Mint 20** | `tinydock_1.0_amd64_ubuntu20.deb`（见下方说明） |
+  | Ubuntu 26.04 / **Linux Mint 23**（预期） | 可直接沿用上面的 `tinydock_1.0_amd64.deb`（同为 t64 库） |
 
-  > 两者仅运行库包名不同（24.04 为 t64 改名后的 `libgtk-3-0t64`，22.04 为 `libgtk-3-0`），源码完全一致，已用 CI 在两个 runner 上分别自动构建并随 Release 发布。
+  > 各包**源码完全一致**，仅运行库包名不同（24.04 / 26.04 为 t64 改名后的 `libgtk-3-0t64`，20.04 / 22.04 为 `libgtk-3-0`）；依赖由 `dpkg-shlibdeps` 在对应 runner 上自动推导。已由 CI 在 ubuntu-24.04 / 22.04 上分别构建并随 Release 发布。
+  >
+  > **关于 Mint 20 / Ubuntu 20.04**：GitHub 已不再提供 20.04 的构建 runner，因此没有预构建包。需要在本机 20.04 上自行构建：`make deb DEB_SUFFIX=_ubuntu20`（同样会自动推导依赖）。
 - 运行期依赖（打包时由 dpkg-shlibdeps 自动推导）：GTK3、libwnck-3、cairo、glib、pango、atk 等。
 - 构建依赖：cargo + rustc、libgtk-3-dev、libwnck-3-dev、pkg-config。
 - **tclock 额外构建依赖**（eframe/OpenGL）：libxkbcommon-dev、libwayland-dev、libx11-dev、libgl1-mesa-dev、libglu1-mesa-dev、libasound2-dev、pkg-config。
