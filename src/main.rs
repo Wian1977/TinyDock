@@ -388,6 +388,32 @@ fn save_hover_scale(v: f64) {
     save_text(&hover_scale_path(), &v.to_string());
 }
 
+// Register ourselves for autostart on the HOST session. Only meaningful
+// inside Flatpak (the .deb install scripts already handle autostart): we write
+// a ~/.config/autostart/<id>.desktop whose Exec points at `flatpak run <id>`,
+// which the host desktop environment can actually execute. Outside Flatpak this
+// is a no-op.
+fn ensure_autostart() {
+    let flatpak_id = match std::env::var("FLATPAK_ID") {
+        Ok(id) => id,
+        Err(_) => return, // not in Flatpak; the .deb/install paths handle autostart
+    };
+    let mut p = glib::user_config_dir();
+    p.push("autostart");
+    p.push(format!("{}.desktop", flatpak_id));
+    if p.exists() {
+        return;
+    }
+    if let Some(parent) = p.parent() {
+        let _ = std::fs::create_dir_all(parent);
+    }
+    let content = format!(
+        "[Desktop Entry]\n         Type=Application\n         Name=TinyDock\n         Comment=Lightweight elastic dock with hover zoom\n         Exec=flatpak run {}\n         Icon={}\n         X-GNOME-Autostart-enabled=true\n         StartupNotify=false\n",
+        flatpak_id, flatpak_id
+    );
+    let _ = std::fs::write(&p, content);
+}
+
 // 根据停靠方向返回（槽位宽, 槽位高）；尺寸固定、与当前放大倍数无关，保证切换倍数时 dock 位置不变
 fn cell_size(pos: Position) -> (i32, i32) {
     match pos {
@@ -434,7 +460,25 @@ fn load_icon_by_id(id: &str, size: i32) -> Pixbuf {
         .unwrap_or_else(|| scaled(&fallback_pixbuf(), size))
 }
 
+// Launch a desktop app. Inside a Flatpak sandbox, gio cannot spawn host
+// processes directly, so we ask the host session to launch it via
+// `flatpak-spawn --host gtk-launch <id>`. This requires the Flatpak permission
+// `--talk-name=org.freedesktop.Flatpak` (see flathub/ manifest). Outside
+// Flatpak (the .deb build) we use the normal gio launch path.
 fn launch_id(id: &str, t: u32) {
+    if std::env::var("FLATPAK_ID").is_ok() {
+        // Running inside Flatpak: delegate to the host's launcher.
+        let status = std::process::Command::new("flatpak-spawn")
+            .args(["--host", "gtk-launch", id])
+            .status();
+        match status {
+            Ok(s) if s.success() => return,
+            _ => eprintln!(
+                "tinydock: flatpak-spawn host launch failed for {}; falling back",
+                id
+            ),
+        }
+    }
     if let Some(app) = gio::DesktopAppInfo::new(id) {
         let ctx = gdk::Display::default().and_then(|d| d.app_launch_context());
         if let Some(c) = ctx.as_ref() {
@@ -976,6 +1020,7 @@ fn place_window(window: &gtk::Window, pos: &Position) {
 
 fn main() {
     let _ = gtk::init();
+    ensure_autostart();
 
     let pos = Position::Bottom;
     let launchers = Rc::new(RefCell::new(load_launchers()));
