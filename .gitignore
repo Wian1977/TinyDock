@@ -2,3 +2,9 @@ target/
 *.deb
 tinydock.desktop
 tclock.desktop
+
+# local-only internal docs (never push)
+HANDOFF.md
+AGENTS.md
+docs/
+.local_internal_backup/
